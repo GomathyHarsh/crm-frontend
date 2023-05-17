@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import UserContext from "../Context/UserContext";
+import Lead from "../Components/Lead";
+
 
 const PrivateRoutes = ({children,...rest}) => {
-   const {user} = useContext(UserContext)
+   const {user,loading} = useContext(UserContext)
    if(!user){
   
-    return <div>Welcome To Bulk Email Tool</div>
+    return <div><Lead/></div>
    }
 return(
     user ? <Outlet/> :<Navigate to='/login' />

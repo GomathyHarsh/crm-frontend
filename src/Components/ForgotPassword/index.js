@@ -11,9 +11,10 @@ const ForgotPassword = () => {
     const handleSubmit = async (event) => {
         try {
             event.preventDefault();
-            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/forgotPassword`, { email: email }, { withCredentials: true });
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/forgotPassword`, { email: email });
             if (response) {
                 setIsEmailSent(true);
+                alert("Reset Link sent your email");
             }
         } catch (error) {
             console.log('Error: ', error);

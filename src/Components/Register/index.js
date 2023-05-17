@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const Register = () =>{
     
@@ -9,7 +10,7 @@ const Register = () =>{
         email: '',
         password: '',
         mobileNumber: '',
-        role: 1
+        role: ''
     })
     const navigate = useNavigate();
     
@@ -25,7 +26,7 @@ const Register = () =>{
      try{
       event.preventDefault(); // to prevant data and state,to carry the event- entire function execution
      // console.log('Logging in');
-      const response= await axios.post(`${process.env.REACT_APP_BASE_URL}/register`,userDetails,{withCredentials:true});
+      const response= await axios.post(`${process.env.REACT_APP_BASE_URL}/register`,userDetails);
       if(response){
         navigate('/login');
       }
@@ -35,8 +36,8 @@ const Register = () =>{
      }
     }
     return(
-        <section className="vh-100 bg-image">
-        <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+        <section className="vh-80 ">
+        <div className="mask d-flex align-items-center h-60 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-9 col-lg-7 col-xl-6">
@@ -70,22 +71,21 @@ const Register = () =>{
                         <label className="form-label" for="form3Example4cdg">Password</label>
                       </div>
                       <div>
-                      <select className="form-select" aria-label="Default select example">
-                      <option selected>Select your role</option>
-                      <option type="user" value={userDetails.role} onChange={(e) => handleForm({role:e.target.value})}>User</option>
-                     <option type="manager" onChange={(e) => handleForm({role:e.target.value})} value={userDetails.role}>Manager</option>
-                     <option  type="admin" onChange={(e) => handleForm({role:e.target.value})} value={userDetails.role}>Admin</option>
+                      <select className="form-select" aria-label="Default select example" value={userDetails.role} onChange={(e) => handleForm({role: e.target.value})}>
+                         <option value="" disabled selected>Select your role</option>
+                         <option value="user">User</option>
+                         <option value="manager">Manager</option>
+                         <option value="admin">Admin</option>
                       </select>
+
                       </div>
                      
       
                       <div className="d-flex justify-content-center">
                         <button type="submit"
-                          className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                          className="btn btn-success mt-3 ">Register</button>
                       </div>
       
-                      <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="/login"
-                          className="fw-bold text-body"><u>Login here</u></a></p>
       
                     </form>
       
